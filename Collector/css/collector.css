@@ -1,0 +1,82 @@
+html, body{
+    width : 99%;
+    height : 98%;
+}
+
+body{
+    margin : 5px;
+    border: solid #fbf6f6;
+}
+
+#collectorContainer{
+    position: relative;
+    top: calc(100% - 130px);
+    left: 45%;
+    z-index: 2;
+    border: solid rgba(255, 0, 0, 0.9) 2px;
+    border-top: none;
+    border-bottom: none;
+    width: 100px;
+    height: 125px;
+}
+
+div#collectorContainer:hover, div#collectorContainer:hover div {
+    border-color: rgba(255, 0, 0, 1);
+}
+
+div#collectorContainer:hover div#lid{
+    background-color: rgba(255, 0, 0, 1);
+    color: rgba(255, 0, 0, 1);
+}
+
+#collectorContainer div{
+    width: 100px;
+    border: solid rgba(255, 0, 0, 0.9) 2px;
+    position: absolute;
+    border-radius: 50%;
+    height: 25px;
+    
+}
+#collectorContainer div#lid{
+top: -20px;
+    left: -2px;
+    background-color: rgba(255, 0, 0, 0.9);
+}
+
+#collectorContainer div#mouth{
+ top: -12px;
+    left: -2px;
+}
+
+#collectorContainer div#base{
+    bottom: -12px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-width: 6px;
+    width: 104px;
+    left: -2px;
+}
+
+
+#collectorContainer div#lid:after, #collectorContainer div#lid:before {
+    content: "|";
+    font-weight: bold;
+    position: relative;
+    top: 10px;
+    color: rgba(255, 0, 0, 0.9);
+}
+
+#collectorContainer div#lid:before{
+    left: -3px;
+}
+
+#collectorContainer div#lid:after{
+    right: -96px;
+}
+
+div#collectorContainer:hover div#lid {
+    transform: rotate(75deg);
+    top: -58px;
+    left: 38px;
+}
