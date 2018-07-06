@@ -253,23 +253,14 @@ div#laserContainer:not( .hovered ) div#laserbeam, div#laserContainer:not( :hover
     transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
-.laser-title, span.laser-instruction{
+.laser-title{
     position: absolute;
     color: red;
     font-size: 20px;
     font-weight: bold;
     bottom: 40%;
-    left: 20px;
+    left: 24px;
     text-align: justify;
     vertical-align: middle;
-}
-
-span.laser-instruction{
-    font-size: 12px;
-    text-align: center;
-    bottom: 20%;
-    vertical-align: top;
-    text-align: center;
-    left: 4px;
 }
     
