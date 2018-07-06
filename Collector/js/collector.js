@@ -3,14 +3,28 @@ var laserModule = (function(){
    
     function laserMouseClickHandler(event){
         if(event.currentTarget.classList.contains("hovered")){
-            event.currentTarget.classList.remove("hovered");
+            closeLaser();
         }else{
-            event.currentTarget.classList.add("hovered");
+            openLaser();
+        }   
+    }
+    
+    function sandboxClickHandler(event){
+        if(event.currentTarget == event.target && event.target.nodeName === "BODY"){
+            closeLaser();
         }
-        
+    }
+    
+    function closeLaser(){
+        document.getElementById('laserContainer').classList.remove("hovered");
+    }
+    
+    function openLaser(){
+        document.getElementById('laserContainer').classList.add("hovered");
     }
     
     return {
-        laserMouseClickHandler : laserMouseClickHandler
+        laserMouseClickHandler : laserMouseClickHandler,
+        sandboxClickHandler : sandboxClickHandler
     };
 }());
