@@ -109,7 +109,7 @@ div#laserContainer.hovered div#laserbeam, div#laserContainer:hover div#laserbeam
     display : block;
 }
 
-div#laserContainer:not( :hover ) div#laserbeam {
+div#laserContainer div#laserbeam, div#laserContainer:not( :hover ) div#laserbeam {
     transition-property: height;
     transition-duration: 0.1s;
     transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
