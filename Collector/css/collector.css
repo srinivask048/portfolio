@@ -157,6 +157,7 @@ body{
     border-bottom: none;
     width: 100px;
     height: 125px;
+    cursor: pointer;
 }
 
 div#laserContainer.hovered, div#laserContainer.hovered  div {
@@ -255,12 +256,21 @@ div#laserContainer:not( .hovered ) div#laserbeam, div#laserContainer:not( :hover
 
 .laser-title{
     position: absolute;
-    color: red;
-    font-size: 20px;
+    color: gray;
+    font-size: 16px;
     font-weight: bold;
     bottom: 40%;
-    left: 24px;
+    left: 15px;
     text-align: justify;
     vertical-align: middle;
+    user-select: none;
+    transition-property: transform;
+    transition-duration: .3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
-    
+
+div#laserContainer.hovered span.laser-title{
+    color: #ce6868;
+    bottom: 41%;
+    transform: rotateX(360deg);
+}
