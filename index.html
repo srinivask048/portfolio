@@ -25,9 +25,24 @@
 			border-radius: 50px;
 		}
 		
-		header h1 {
+		header h1,
+		.titlemarker {
 			color: #400b82;
 			text-align: center;
+		}
+		
+		.titlemarker {
+			text-shadow: 1px 5px 6px;
+		}
+		
+		h1.fillname {
+			color: #be9ce8;
+			margin: 0px;
+		}
+		
+		h1.shortname {
+			text-shadow: 1px 5px 6px;
+			margin-bottom: 0px;
 		}
 		
 		iframe {
@@ -44,7 +59,8 @@
 <body>
 	<section class="main">
 		<header>
-			<h1>Srinivasa Raju Kalidindi<sub>Srini K</sub></h1>
+			<h1 class="shortname">Srini K</h1>
+			<h1 class="fillname"><span class="titlemarker">Srini</span>vasa Raju <span class="titlemarker">K</span>alidindi</h1>
 		</header>
 		<iframe class="gamessection" src="./Collector/collector.html"></iframe>
 

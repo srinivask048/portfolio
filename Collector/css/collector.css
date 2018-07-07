@@ -136,141 +136,142 @@ span.laser-instruction{
 }
     */
 
-html, body{
-    width : 99%;
-    height : 98%;
+html,
+body {
+	width: 99%;
+	height: 98%;
 }
 
-body{
-    margin: 5px;
-    border: solid #fbf6f6;
-    background-color: rgba(255, 255, 255, 0.8);
+body {
+	margin: 5px;
+	background-color: rgba(255, 255, 255, 0.8);
 }
 
-#laserContainer{
-    position: relative;
-    top: calc(100% - 130px);
-    left: 45%;
-    z-index: 2;
-    border: solid rgba(255, 0, 0, 0.9) 2px;
-    border-top: none;
-    border-bottom: none;
-    width: 100px;
-    height: 125px;
-    cursor: pointer;
+#laserContainer {
+	position: relative;
+	top: calc(100% - 130px);
+	left: 45%;
+	z-index: 2;
+	border: solid rgba(255, 0, 0, 0.9) 2px;
+	border-top: none;
+	border-bottom: none;
+	width: 100px;
+	height: 125px;
+	cursor: pointer;
 }
 
-div#laserContainer.hovered, div#laserContainer.hovered  div {
-    border-color: rgba(255, 0, 0, 1);
+div#laserContainer.hovered,
+div#laserContainer.hovered div {
+	border-color: rgba(255, 0, 0, 1);
 }
 
-div#laserContainer.hovered div#lid{
-    background-color: rgba(255, 0, 0, 1);
-    color: rgba(255, 0, 0, 1);
+div#laserContainer.hovered div#lid {
+	background-color: rgba(255, 0, 0, 1);
+	color: rgba(255, 0, 0, 1);
 }
 
-#laserContainer div{
-    width: 100px;
-    border: solid rgba(255, 0, 0, 0.9) 2px;
-    position: absolute;
-    border-radius: 50%;
-    height: 25px;
-    
-}
-#laserContainer div#lid{
-top: -20px;
-    left: -2px;
-    background-color: rgba(255, 0, 0, 0.9);
+#laserContainer div {
+	width: 100px;
+	border: solid rgba(255, 0, 0, 0.9) 2px;
+	position: absolute;
+	border-radius: 50%;
+	height: 25px;
 }
 
-#laserContainer div#mouth{
- top: -12px;
-    left: -2px;
+#laserContainer div#lid {
+	top: -20px;
+	left: -2px;
+	background-color: rgba(255, 0, 0, 0.9);
 }
 
-#laserContainer div#base{
-    bottom: -12px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom-width: 6px;
-    width: 104px;
-    left: -2px;
+#laserContainer div#mouth {
+	top: -12px;
+	left: -2px;
 }
 
-
-#laserContainer div#lid:after, #laserContainer div#lid:before {
-    content: "|";
-    font-weight: bold;
-    position: relative;
-    top: 10px;
-    color: rgba(255, 0, 0, 0.9);
+#laserContainer div#base {
+	bottom: -12px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom-width: 6px;
+	width: 104px;
+	left: -2px;
 }
 
-#laserContainer div#lid:before{
-    left: -3px;
+#laserContainer div#lid:after,
+#laserContainer div#lid:before {
+	content: "|";
+	font-weight: bold;
+	position: relative;
+	top: 10px;
+	color: rgba(255, 0, 0, 0.9);
 }
 
-#laserContainer div#lid:after{
-    right: -96px;
+#laserContainer div#lid:before {
+	left: -3px;
 }
 
-div#laserContainer.hovered div#lid{
-    transform: rotate(115deg);
-    top: -55px;
-    left: 70px;
+#laserContainer div#lid:after {
+	right: -96px;
 }
 
-div#laserContainer.hovered div#lid:after{
-    content: none;
+div#laserContainer.hovered div#lid {
+	transform: rotate(115deg);
+	top: -55px;
+	left: 70px;
 }
 
+div#laserContainer.hovered div#lid:after {
+	content: none;
+}
 
 div#laserbeam {
-    height: 0px;
-    width: 102px;
-    margin: -2px;
-    border: white;
-    bottom: 112px;
-    z-index: -1;
-    background: #f3c1c1;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    transition-property: height;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in;
+	height: 0px;
+	width: 102px;
+	margin: -2px;
+	border: white;
+	bottom: 112px;
+	z-index: -1;
+	background: #f3c1c1;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	border-top-left-radius: 50px;
+	border-top-right-radius: 50px;
+	transition-property: height;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-in;
 }
 
-div#laserContainer.hovered div#laserbeam{
-    height: 1000%;
-    display : block;
+div#laserContainer.hovered div#laserbeam {
+	height: 1000%;
+	display: block;
 }
 
-div#laserContainer:not( .hovered ) div#laserbeam, div#laserContainer:not( :hover ) div#laserbeam {
-    transition-property: height;
-    transition-duration: 0.1s;
-    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+div#laserContainer:not( .hovered) div#laserbeam,
+div#laserContainer:not( :hover) div#laserbeam {
+	transition-property: height;
+	transition-duration: 0.1s;
+	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
-.laser-title{
-    position: absolute;
-    color: gray;
-    font-size: 16px;
-    font-weight: bold;
-    bottom: 40%;
-    left: 15px;
-    text-align: justify;
-    vertical-align: middle;
-    user-select: none;
-    transition-property: transform;
-    transition-duration: .3s;
-    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+.laser-title {
+	position: absolute;
+	color: gray;
+	font-size: 16px;
+	font-weight: bold;
+	bottom: 40%;
+	left: 15px;
+	text-align: justify;
+	vertical-align: middle;
+	user-select: none;
+	transition-property: transform;
+	transition-duration: .3s;
+	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 
-div#laserContainer.hovered span.laser-title{
-    color: #ce6868;
-    bottom: 41%;
-    transform: rotateX(360deg);
+div#laserContainer.hovered span.laser-title {
+	color: #ce6868;
+	bottom: 41%;
+	transform: rotateX(360deg);
 }
