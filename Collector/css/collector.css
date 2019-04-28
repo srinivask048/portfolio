@@ -275,3 +275,9 @@ div#laserContainer.hovered span.laser-title {
 	bottom: 41%;
 	transform: rotateX(360deg);
 }
+
+.module-description-left{
+	position: absolute;
+	left: 10px;
+	top: 30%;
+}

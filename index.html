@@ -2,27 +2,31 @@
 <html>
 <head>
 	<title>SriniK Portfolio</title>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Free Web tutorials">
 	<meta name="keywords" content="Srinivasa,Raju,Kalidindi,Profile,Portfolio,Srinivasa Raju Kalidindi profile, Srinivasa Raju Kalidindi portfolio, kalidindi profile,kalidindi portfolio, kalidindi resume">
 	<meta name="author" content="John Doe">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="Collector/css/carousal.css">
 
 	<style type="text/css">
 		body {
-			background-color: #EDEDED;
+			background-color: #FFFFFF;
 		}
 		
 		body,
 		html {
 			height: 100%;
+			overflow: hidden;
+			background: #454545;
 		}
 		
 		section.main {
-			background-color: #FFFFFF;
+			background: #454545;
 			width: 100%;
 			height: 100%;
-			border-radius: 50px;
+			/* border-radius: 50px; */
 		}
 		
 		header h1,
@@ -58,12 +62,107 @@
 
 <body>
 	<section class="main">
-		<header>
-			<h1 class="shortname">Srini K</h1>
-			<h1 class="fillname"><span class="titlemarker">Srini</span>vasa Raju <span class="titlemarker">K</span>alidindi</h1>
-		</header>
-		<iframe class="gamessection" src="./Collector/collector.html"></iframe>
+	
+		
+		<div class="container" style="max-width: 1400px; margin: 0 auto;">
+			<div id="slider">
+	  <div class="dp-wrap">
+		<div id="dp-slider">
+	
+		  <div class="dp_item" data-class="1" data-position="1">
+			<div class="dp-content">
+					<h1 class="shortname">Srini K</h1>
+			  <h2><h1 class="fillname"><span class="titlemarker">Srini</span>vasa Raju <span class="titlemarker">K</span>alidindi</h1></h2>
+			  <p> Senior Software Developer </p>
+			  
+			</div>
+			<div class="dp-img">
+				<span>Description comes here!!!</span>
 
+			</div>
+				
+			
+		  </div>
+	
+		  <div class="dp_item" data-class="2" data-position="2">
+			
+			
+				<iframe class="gamessection" src="./Collector/collector.html"></iframe>
+			
+		  </div>
+	
+		  <div class="dp_item" data-class="3" data-position="3">
+			<div class="dp-content">
+	
+			  <h2>Slide 3</h2>
+			  <p> This is Slide 3 </p>
+			  <a href="#" class="site-btn">Read More…</a>
+			</div>
+			<div class="dp-img">
+			  Solar system comes here!!!
+			</div>
+		  </div>
+	
+		  <div class="dp_item" data-class="4" data-position="4">
+			<div class="dp-content">
+	
+			  <h2>Slide 4</h2>
+			  <p> This is Slide 4 </p>
+			  <a href="#" class="site-btn">Read More…</a>
+			</div>
+			<div class="dp-img">
+			   Milkyway Galaxy comes here!!!
+			</div>
+		  </div>
+		</div>
+	
+		<span id="dp-next">
+		  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.401 51.401">
+			<defs>
+			  <style>
+				.cls-1 {
+				  fill: none;
+				  stroke: #fa8c8c;
+				  stroke-miterlimit: 10;
+				  stroke-width: 7px;
+				}
+			  </style>
+			</defs>
+			<path id="Rectangle_4_Copy" data-name="Rectangle 4 Copy" class="cls-1" d="M32.246,0V33.178L0,31.953" transform="translate(0.094 25.276) rotate(-45)"/>
+		  </svg>
+		</span>
+	
+		<span id="dp-prev">
+		  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.401 51.401">
+			<defs>
+			  <style>
+				.cls-1 {
+				  fill: none;
+				  stroke: #fa8c8c;
+				  stroke-miterlimit: 10;
+				  stroke-width: 7px;
+				}
+			  </style>
+			</defs>
+			<path id="Rectangle_4_Copy" data-name="Rectangle 4 Copy" class="cls-1" d="M32.246,0V33.178L0,31.953" transform="translate(0.094 25.276) rotate(-45)"/>
+		  </svg>
+		</span>
+	
+	
+	
+		<ul id="dp-dots">
+		  <li data-class="1" class="active"></li>
+		  <li data-class="2"></li>
+		  <li data-class="3"></li>
+		  <li data-class="4"></li>
+		</ul>
+	  </div>
+	</div>
+		</div>
 	</section>
+
+	<script src="Collector/js/libs/jquery.min.js"></script>
+	<script src="Collector/js/carousal.js"></script>
+	
 </body>
 </html>
