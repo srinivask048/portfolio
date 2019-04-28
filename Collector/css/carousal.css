@@ -4,6 +4,13 @@
 #slider{
     margin: 10px;
 }
+.topic-content{
+    position: relative;
+    height: calc(100vh - 65px);
+    width: 100%;
+    min-height: 100%;
+    border: solid 1px red;
+}
 .dp-wrap {
     margin: 0 auto;
     position: relative;
