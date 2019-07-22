@@ -134,7 +134,7 @@ var AppComponent = /** @class */ (function () {
             }
         }
         this.bricks = bricks;
-        this.playAnimation();
+        this.draw();
     };
     AppComponent.prototype.mouseMoveHandler = function (e) {
         var relativeX = e.clientX - this.canvas.offsetLeft;
@@ -190,6 +190,7 @@ var AppComponent = /** @class */ (function () {
         this.drawPaddle();
         this.drawScore();
         this.drawLives();
+        this.drawInstruction();
         this.collisionDetection();
         if (this.rightPressed && this.paddleX < this.canvas.width - this.paddleWidth) {
             this.paddleX += 7;
@@ -256,6 +257,12 @@ var AppComponent = /** @class */ (function () {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Score: " + this.score, 8, 20);
+    };
+    AppComponent.prototype.drawInstruction = function () {
+        var ctx = this.canvasCtx;
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#291111";
+        ctx.fillText("Double tap to start! Tap to pause.", 100, 20);
     };
     AppComponent.prototype.drawLives = function () {
         var ctx = this.canvasCtx;
