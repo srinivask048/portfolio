@@ -5,7 +5,7 @@ var path = require("path");
 
 var app = express();
 
-app.set('port', 8080);
+app.set('port', 8081);
 
 //Set static path:
 app.use(express.static(path.join(__dirname, '../')));
