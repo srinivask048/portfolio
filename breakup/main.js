@@ -74,7 +74,7 @@ module.exports = "* { \n    padding: 0; margin: 0; \n}\ncanvas { \n    backgroun
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"convas-container\">\n<canvas id=\"myCanvas\" width=\"480\" height=\"320\" (click)=\"canvasClickHandler()\" (dblclick)=\"canvasDoubleClkHandler()\"></canvas>\n<a class=\"paddle-button left-paddle\" id=\"left-paddle\" (click)=\"tapHandler('L')\" href=\"#\"></a>\n<a class=\"paddle-button right-paddle\" id=\"right-paddle\" (click)=\"tapHandler('R')\" href=\"#\"></a>\n<router-outlet></router-outlet>\n</div>"
+module.exports = "<div class=\"convas-container\">\n<canvas id=\"myCanvas\" width=\"480\" height=\"320\" (click)=\"canvasClickHandler()\"></canvas>\n<a class=\"paddle-button left-paddle\" id=\"left-paddle\" (click)=\"tapHandler('L')\" href=\"#\"></a>\n<a class=\"paddle-button right-paddle\" id=\"right-paddle\" (click)=\"tapHandler('R')\" href=\"#\"></a>\n</div>"
 
 /***/ }),
 
@@ -90,60 +90,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_model_paddle_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/model/paddle.model */ "./src/app/shared/model/paddle.model.ts");
+/* harmony import */ var _shared_model_ball_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/model/ball.model */ "./src/app/shared/model/ball.model.ts");
+/* harmony import */ var _shared_model_brick_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/model/brick.model */ "./src/app/shared/model/brick.model.ts");
+
+
+
 
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.ballDX = 2;
-        this.ballDY = -2;
-        this.ballRadius = 10;
+        //ball
+        this.ball = new _shared_model_ball_model__WEBPACK_IMPORTED_MODULE_3__["Ball"]();
         //paddle
-        this.paddleHeight = 10;
-        this.paddleWidth = 75;
-        this.rightPressed = false;
-        this.leftPressed = false;
+        this.paddle = new _shared_model_paddle_model__WEBPACK_IMPORTED_MODULE_2__["Paddle"]();
         //bricks
-        this.brickRowCount = 3;
-        this.brickColumnCount = 5;
-        this.brickWidth = 75;
-        this.brickHeight = 20;
-        this.brickPadding = 10;
-        this.brickOffsetTop = 30;
-        this.brickOffsetLeft = 30;
+        this.brick = new _shared_model_brick_model__WEBPACK_IMPORTED_MODULE_4__["Brick"]();
         this.bricks = [];
         //score
         this.score = 0;
         //lives
         this.lives = 3;
         this.title = 'breakup';
+        this.animating = false;
     }
-    AppComponent.prototype.ngOnInit = function () {
-        this.canvas = document.getElementById("myCanvas");
-        this.canvasCtx = this.canvas.getContext("2d");
-        this.ballX = this.canvas.width / 2;
-        this.ballY = this.canvas.height - 30;
-        this.paddleX = (this.canvas.width - this.paddleWidth) / 2;
-        document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
-        document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
-        document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
+    AppComponent.prototype.resetGame = function () {
+        this.ball = new _shared_model_ball_model__WEBPACK_IMPORTED_MODULE_3__["Ball"]();
+        this.paddle = new _shared_model_paddle_model__WEBPACK_IMPORTED_MODULE_2__["Paddle"]();
+        this.brick = new _shared_model_brick_model__WEBPACK_IMPORTED_MODULE_4__["Brick"]();
+        this.score = 0;
+        this.lives = 3;
         var bricks = [];
-        for (var c = 0; c < this.brickColumnCount; c++) {
+        for (var c = 0; c < this.brick.columnCount; c++) {
             bricks[c] = [];
-            for (var r = 0; r < this.brickRowCount; r++) {
+            for (var r = 0; r < this.brick.rowCount; r++) {
                 bricks[c][r] = { x: 0, y: 0, status: 1 };
             }
         }
         this.bricks = bricks;
+    };
+    AppComponent.prototype.prepareGameViewPort = function () {
+        this.canvas = document.getElementById("myCanvas");
+        this.canvasCtx = this.canvas.getContext("2d");
+        this.ball.x = this.canvas.width / 2;
+        this.ball.y = this.canvas.height - 30;
+        this.paddle.x = (this.canvas.width - this.paddle.width) / 2;
+    };
+    AppComponent.prototype.registerDocEvents = function () {
+        document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
+        document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
+        document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
+    };
+    AppComponent.prototype.renderGame = function () {
+        this.resetGame();
+        this.prepareGameViewPort();
         this.draw();
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.registerDocEvents();
+        this.renderGame();
     };
     AppComponent.prototype.mouseMoveHandler = function (e) {
         var relativeX = e.clientX - this.canvas.offsetLeft;
         if (relativeX > 0 && relativeX < this.canvas.width) {
-            this.paddleX = relativeX - this.paddleWidth / 2;
+            this.paddle.x = relativeX - this.paddle.width / 2;
         }
     };
     AppComponent.prototype.canvasClickHandler = function () {
-        this.stopAnnimation();
+        if (this.animating) {
+            this.stopAnnimation();
+        }
+        else {
+            this.playAnimation();
+        }
+        this.animating = !this.animating;
     };
     AppComponent.prototype.canvasDoubleClkHandler = function () {
         this.playAnimation();
@@ -159,31 +179,30 @@ var AppComponent = /** @class */ (function () {
         this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawBricks();
         this.drawBall();
-        this.ballX += this.ballDX;
-        this.ballY += this.ballDY;
-        if (this.ballX + this.ballDX > this.canvas.width - this.ballRadius || this.ballX + this.ballDX < this.ballRadius) {
-            this.ballDX = -this.ballDX;
+        this.ball.x += this.ball.dx;
+        this.ball.y += this.ball.dy;
+        if (this.ball.x + this.ball.dx > this.canvas.width - this.ball.radius || this.ball.x + this.ball.dx < this.ball.radius) {
+            this.ball.dx = -this.ball.dx;
         }
-        if (this.ballY + this.ballDY < this.ballRadius) {
-            this.ballDY = -this.ballDY;
+        if (this.ball.y + this.ball.dy < this.ball.radius) {
+            this.ball.dy = -this.ball.dy;
         }
-        else if (this.ballY + this.ballDY > this.canvas.height - this.ballRadius) {
-            if (this.ballX > this.paddleX && this.ballX < this.paddleX + this.paddleWidth) {
-                this.ballDY = -this.ballDY;
+        else if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
+            if (this.ball.x > this.paddle.x && this.ball.x < this.paddle.x + this.paddle.width) {
+                this.ball.dy = -this.ball.dy;
             }
             else {
                 this.lives--;
                 if (!this.lives) {
-                    alert("GAME OVER");
-                    document.location.reload();
                     this.stopAnnimation();
+                    this.renderGame();
                 }
                 else {
-                    this.ballDX = this.canvas.width / 2;
-                    this.ballY = this.canvas.height - 30;
-                    this.ballDX = 2;
-                    this.ballDY = -2;
-                    this.paddleX = (this.canvas.width - this.paddleWidth) / 2;
+                    this.ball.dx = this.canvas.width / 2;
+                    this.ball.y = this.canvas.height - 30;
+                    this.ball.dx = 2;
+                    this.ball.dy = -2;
+                    this.paddle.x = (this.canvas.width - this.paddle.width) / 2;
                 }
             }
         }
@@ -192,24 +211,24 @@ var AppComponent = /** @class */ (function () {
         this.drawLives();
         this.drawInstruction();
         this.collisionDetection();
-        if (this.rightPressed && this.paddleX < this.canvas.width - this.paddleWidth) {
-            this.paddleX += 7;
+        if (this.paddle.rightPressed && this.paddle.x < this.canvas.width - this.paddle.width) {
+            this.paddle.x += 7;
         }
-        else if (this.leftPressed && this.paddleX > 0) {
-            this.paddleX -= 7;
+        else if (this.paddle.leftPressed && this.paddle.x > 0) {
+            this.paddle.x -= 7;
         }
     };
     AppComponent.prototype.drawBall = function () {
         this.canvasCtx.beginPath();
         console.count("drawing");
-        this.canvasCtx.arc(this.ballX, this.ballY, this.ballRadius, 0, Math.PI * 2);
+        this.canvasCtx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
         this.canvasCtx.fillStyle = "#0095DD";
         this.canvasCtx.fill();
         this.canvasCtx.closePath();
     };
     AppComponent.prototype.drawPaddle = function () {
         this.canvasCtx.beginPath();
-        this.canvasCtx.rect(this.paddleX, this.canvas.height - this.paddleHeight, this.paddleWidth, this.paddleHeight);
+        this.canvasCtx.rect(this.paddle.x, this.canvas.height - this.paddle.height, this.paddle.width, this.paddle.height);
         this.canvasCtx.fillStyle = "#0095DD";
         this.canvasCtx.fill();
         this.canvasCtx.closePath();
@@ -217,15 +236,15 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.drawBricks = function () {
         var bricks = this.bricks;
         var ctx = this.canvasCtx;
-        for (var c = 0; c < this.brickColumnCount; c++) {
-            for (var r = 0; r < this.brickRowCount; r++) {
+        for (var c = 0; c < this.brick.columnCount; c++) {
+            for (var r = 0; r < this.brick.rowCount; r++) {
                 if (bricks[c][r].status == 1) {
-                    var brickX = (c * (this.brickWidth + this.brickPadding)) + this.brickOffsetLeft;
-                    var brickY = (r * (this.brickHeight + this.brickPadding)) + this.brickOffsetTop;
+                    var brickX = (c * (this.brick.width + this.brick.padding)) + this.brick.offsetLeft;
+                    var brickY = (r * (this.brick.height + this.brick.padding)) + this.brick.offsetTop;
                     bricks[c][r].x = brickX;
                     bricks[c][r].y = brickY;
                     ctx.beginPath();
-                    ctx.rect(brickX, brickY, this.brickWidth, this.brickHeight);
+                    ctx.rect(brickX, brickY, this.brick.width, this.brick.height);
                     ctx.fillStyle = "#0095DD";
                     ctx.fill();
                     ctx.closePath();
@@ -234,15 +253,15 @@ var AppComponent = /** @class */ (function () {
         }
     };
     AppComponent.prototype.collisionDetection = function () {
-        for (var c = 0; c < this.brickColumnCount; c++) {
-            for (var r = 0; r < this.brickRowCount; r++) {
+        for (var c = 0; c < this.brick.columnCount; c++) {
+            for (var r = 0; r < this.brick.rowCount; r++) {
                 var b = this.bricks[c][r];
                 if (b.status == 1) {
-                    if (this.ballX > b.x && this.ballX < b.x + this.brickWidth && this.ballY > b.y && this.ballY < b.y + this.brickHeight) {
-                        this.ballDY = -this.ballDY;
+                    if (this.ball.x > b.x && this.ball.x < b.x + this.brick.width && this.ball.y > b.y && this.ball.y < b.y + this.brick.height) {
+                        this.ball.dy = -this.ball.dy;
                         b.status = 0;
                         this.score++;
-                        if (this.score == this.brickRowCount * this.brickColumnCount) {
+                        if (this.score == this.brick.rowCount * this.brick.columnCount) {
                             alert("YOU WIN, CONGRATULATIONS!");
                             document.location.reload();
                             this.stopAnnimation();
@@ -272,26 +291,26 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.tapHandler = function (key) {
         if (key === 'R') {
-            this.rightPressed = true;
+            this.paddle.rightPressed = true;
         }
         else if (key == 'L') {
-            this.leftPressed = true;
+            this.paddle.leftPressed = true;
         }
     };
     AppComponent.prototype.keyDownHandler = function (e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
-            this.rightPressed = true;
+            this.paddle.rightPressed = true;
         }
         else if (e.key == "Left" || e.key == "ArrowLeft") {
-            this.leftPressed = true;
+            this.paddle.leftPressed = true;
         }
     };
     AppComponent.prototype.keyUpHandler = function (e) {
         if (e.key == "Right" || e.key == "ArrowRight") {
-            this.rightPressed = false;
+            this.paddle.rightPressed = false;
         }
         else if (e.key == "Left" || e.key == "ArrowLeft") {
-            this.leftPressed = false;
+            this.paddle.leftPressed = false;
         }
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -345,6 +364,80 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/model/ball.model.ts":
+/*!********************************************!*\
+  !*** ./src/app/shared/model/ball.model.ts ***!
+  \********************************************/
+/*! exports provided: Ball */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Ball", function() { return Ball; });
+var Ball = /** @class */ (function () {
+    function Ball() {
+        this.dx = 2;
+        this.dy = -2;
+        this.radius = 10;
+    }
+    return Ball;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/model/brick.model.ts":
+/*!*********************************************!*\
+  !*** ./src/app/shared/model/brick.model.ts ***!
+  \*********************************************/
+/*! exports provided: Brick */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Brick", function() { return Brick; });
+var Brick = /** @class */ (function () {
+    function Brick() {
+        this.rowCount = 3;
+        this.columnCount = 5;
+        this.width = 75;
+        this.height = 20;
+        this.padding = 10;
+        this.offsetTop = 30;
+        this.offsetLeft = 30;
+    }
+    return Brick;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/model/paddle.model.ts":
+/*!**********************************************!*\
+  !*** ./src/app/shared/model/paddle.model.ts ***!
+  \**********************************************/
+/*! exports provided: Paddle */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Paddle", function() { return Paddle; });
+var Paddle = /** @class */ (function () {
+    function Paddle() {
+        this.height = 10;
+        this.width = 75;
+        this.rightPressed = false;
+        this.leftPressed = false;
+    }
+    return Paddle;
 }());
 
 
