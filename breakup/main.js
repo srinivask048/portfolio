@@ -295,11 +295,11 @@ var AppComponent = /** @class */ (function () {
         console.count('tapdown');
         if (key === 'R') {
             this.paddle.rightPressed = true;
-            this.paddle.x += 20;
+            this.paddle.x += this.paddle.width;
         }
         else if (key == 'L') {
             this.paddle.leftPressed = true;
-            this.paddle.x -= 20;
+            this.paddle.x -= this.paddle.width;
         }
     };
     AppComponent.prototype.tapUpHandler = function (key) {
