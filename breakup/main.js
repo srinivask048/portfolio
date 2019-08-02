@@ -74,7 +74,7 @@ module.exports = "* { \n    padding: 0; margin: 0; \n}\ncanvas { \n    backgroun
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"convas-container\">\n<canvas id=\"myCanvas\" width=\"480\" height=\"320\" (click)=\"canvasClickHandler()\"></canvas>\n<a class=\"paddle-button left-paddle\" id=\"left-paddle\" (click)=\"tapHandler('L')\" href=\"#\"></a>\n<a class=\"paddle-button right-paddle\" id=\"right-paddle\" (click)=\"tapHandler('R')\" href=\"#\"></a>\n</div>"
+module.exports = "<div class=\"convas-container\">\n<canvas id=\"myCanvas\" width=\"480\" height=\"320\" (click)=\"canvasClickHandler()\"></canvas>\n<a class=\"paddle-button left-paddle\" id=\"left-paddle\" (mousedown)=\"tapDownHandler('L')\" (mouseup)=\"tapUpHandler('L')\" href=\"#\"></a>\n<a class=\"paddle-button right-paddle\" id=\"right-paddle\" (mousedown)=\"tapDownHandler('R')\" (mouseup)=\"tapUpHandler('R')\" href=\"#\"></a>\n</div>"
 
 /***/ }),
 
@@ -137,9 +137,10 @@ var AppComponent = /** @class */ (function () {
         this.paddle.x = (this.canvas.width - this.paddle.width) / 2;
     };
     AppComponent.prototype.registerDocEvents = function () {
-        document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
-        document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
-        document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
+        // document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
+        // this.keyDownHandler;
+        // document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
+        //document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
     };
     AppComponent.prototype.renderGame = function () {
         this.resetGame();
@@ -217,6 +218,7 @@ var AppComponent = /** @class */ (function () {
         else if (this.paddle.leftPressed && this.paddle.x > 0) {
             this.paddle.x -= 7;
         }
+        this;
     };
     AppComponent.prototype.drawBall = function () {
         this.canvasCtx.beginPath();
@@ -281,7 +283,7 @@ var AppComponent = /** @class */ (function () {
         var ctx = this.canvasCtx;
         ctx.font = "16px Arial";
         ctx.fillStyle = "#291111";
-        ctx.fillText("Double tap to start! Tap to pause.", 100, 20);
+        ctx.fillText("tap to start or pause.", 100, 20);
     };
     AppComponent.prototype.drawLives = function () {
         var ctx = this.canvasCtx;
@@ -289,12 +291,24 @@ var AppComponent = /** @class */ (function () {
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Lives: " + this.lives, this.canvas.width - 65, 20);
     };
-    AppComponent.prototype.tapHandler = function (key) {
+    AppComponent.prototype.tapDownHandler = function (key) {
+        console.count('tapdown');
         if (key === 'R') {
             this.paddle.rightPressed = true;
+            this.paddle.x += 7;
         }
         else if (key == 'L') {
             this.paddle.leftPressed = true;
+            this.paddle.x -= 7;
+        }
+    };
+    AppComponent.prototype.tapUpHandler = function (key) {
+        console.count('tapup');
+        if (key === 'R') {
+            this.paddle.rightPressed = false;
+        }
+        else if (key == 'L') {
+            this.paddle.leftPressed = false;
         }
     };
     AppComponent.prototype.keyDownHandler = function (e) {
@@ -313,6 +327,18 @@ var AppComponent = /** @class */ (function () {
             this.paddle.leftPressed = false;
         }
     };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:keydown', ['$event']),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], AppComponent.prototype, "keyDownHandler", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('window:keyup', ['$event']),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], AppComponent.prototype, "keyUpHandler", null);
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
@@ -437,6 +463,10 @@ var Paddle = /** @class */ (function () {
         this.rightPressed = false;
         this.leftPressed = false;
     }
+    Paddle.prototype.resetPress = function () {
+        this.rightPressed = false;
+        this.leftPressed = false;
+    };
     return Paddle;
 }());
 
