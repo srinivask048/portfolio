@@ -63,7 +63,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "* { \n    padding: 0; margin: 0; \n}\ncanvas { \n    background: #eee; display: block; margin: 0 auto; \n    width: 480px;\n    height: 320px;\n}\n.convas-container{\n    position: relative;\n}\n@media(min:450px){\n\n}\n.paddle-button{\nposition: absolute;\nbottom: 30%;\nheight: 60px;\nwidth: 60px;\nbackground-color: #a9a9a9;\nz-index: 10;\nborder-radius: 50%;\n}\n.paddle-button:hover{\n    opacity: 0.7;\n}\n.left-paddle{\nleft: 0px;\n}\n.right-paddle{\n    right: 0px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXLENBQUMsVUFBVTtDQUN6QjtBQUNEO0lBQ0ksaUJBQWlCLENBQUMsZUFBZSxDQUFDLGVBQWU7SUFDakQsYUFBYTtJQUNiLGNBQWM7Q0FDakI7QUFFRDtJQUNJLG1CQUFtQjtDQUN0QjtBQUNEOztDQUVDO0FBRUQ7QUFDQSxtQkFBbUI7QUFDbkIsWUFBWTtBQUNaLGFBQWE7QUFDYixZQUFZO0FBQ1osMEJBQTBCO0FBQzFCLFlBQVk7QUFDWixtQkFBbUI7Q0FDbEI7QUFFRDtJQUNJLGFBQWE7Q0FDaEI7QUFFRDtBQUNBLFVBQVU7Q0FDVDtBQUVEO0lBQ0ksV0FBVztDQUNkIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIqIHsgXG4gICAgcGFkZGluZzogMDsgbWFyZ2luOiAwOyBcbn1cbmNhbnZhcyB7IFxuICAgIGJhY2tncm91bmQ6ICNlZWU7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW46IDAgYXV0bzsgXG4gICAgd2lkdGg6IDQ4MHB4O1xuICAgIGhlaWdodDogMzIwcHg7XG59XG5cbi5jb252YXMtY29udGFpbmVye1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbkBtZWRpYShtaW46NDUwcHgpe1xuXG59XG5cbi5wYWRkbGUtYnV0dG9ue1xucG9zaXRpb246IGFic29sdXRlO1xuYm90dG9tOiAzMCU7XG5oZWlnaHQ6IDYwcHg7XG53aWR0aDogNjBweDtcbmJhY2tncm91bmQtY29sb3I6ICNhOWE5YTk7XG56LWluZGV4OiAxMDtcbmJvcmRlci1yYWRpdXM6IDUwJTtcbn0gXG5cbi5wYWRkbGUtYnV0dG9uOmhvdmVye1xuICAgIG9wYWNpdHk6IDAuNztcbn1cblxuLmxlZnQtcGFkZGxle1xubGVmdDogMHB4O1xufVxuXG4ucmlnaHQtcGFkZGxle1xuICAgIHJpZ2h0OiAwcHg7XG59Il19 */"
+module.exports = "* { \n    padding: 0; margin: 0; \n}\ncanvas { \n    background: #eee; display: block; margin: 0 auto; \n    width: 480px;\n    height: 320px;\n}\n.convas-container{\n    position: relative;\n}\n@media(min:450px){\n\n}\n.paddle-button{\nposition: absolute;\nbottom: 20px;\nheight: 60px;\nwidth: 60px;\nbackground-color: #a9a9a9;\nz-index: 10;\nborder-radius: 50%;\n}\n.paddle-button:hover{\n    opacity: 0.7;\n}\n.left-paddle{\nleft: 0px;\n}\n.right-paddle{\n    right: 0px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXLENBQUMsVUFBVTtDQUN6QjtBQUNEO0lBQ0ksaUJBQWlCLENBQUMsZUFBZSxDQUFDLGVBQWU7SUFDakQsYUFBYTtJQUNiLGNBQWM7Q0FDakI7QUFFRDtJQUNJLG1CQUFtQjtDQUN0QjtBQUNEOztDQUVDO0FBRUQ7QUFDQSxtQkFBbUI7QUFDbkIsYUFBYTtBQUNiLGFBQWE7QUFDYixZQUFZO0FBQ1osMEJBQTBCO0FBQzFCLFlBQVk7QUFDWixtQkFBbUI7Q0FDbEI7QUFFRDtJQUNJLGFBQWE7Q0FDaEI7QUFFRDtBQUNBLFVBQVU7Q0FDVDtBQUVEO0lBQ0ksV0FBVztDQUNkIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIqIHsgXG4gICAgcGFkZGluZzogMDsgbWFyZ2luOiAwOyBcbn1cbmNhbnZhcyB7IFxuICAgIGJhY2tncm91bmQ6ICNlZWU7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW46IDAgYXV0bzsgXG4gICAgd2lkdGg6IDQ4MHB4O1xuICAgIGhlaWdodDogMzIwcHg7XG59XG5cbi5jb252YXMtY29udGFpbmVye1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbkBtZWRpYShtaW46NDUwcHgpe1xuXG59XG5cbi5wYWRkbGUtYnV0dG9ue1xucG9zaXRpb246IGFic29sdXRlO1xuYm90dG9tOiAyMHB4O1xuaGVpZ2h0OiA2MHB4O1xud2lkdGg6IDYwcHg7XG5iYWNrZ3JvdW5kLWNvbG9yOiAjYTlhOWE5O1xuei1pbmRleDogMTA7XG5ib3JkZXItcmFkaXVzOiA1MCU7XG59IFxuXG4ucGFkZGxlLWJ1dHRvbjpob3ZlcntcbiAgICBvcGFjaXR5OiAwLjc7XG59XG5cbi5sZWZ0LXBhZGRsZXtcbmxlZnQ6IDBweDtcbn1cblxuLnJpZ2h0LXBhZGRsZXtcbiAgICByaWdodDogMHB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -295,11 +295,11 @@ var AppComponent = /** @class */ (function () {
         console.count('tapdown');
         if (key === 'R') {
             this.paddle.rightPressed = true;
-            this.paddle.x += 7;
+            this.paddle.x += 20;
         }
         else if (key == 'L') {
             this.paddle.leftPressed = true;
-            this.paddle.x -= 7;
+            this.paddle.x -= 20;
         }
     };
     AppComponent.prototype.tapUpHandler = function (key) {
